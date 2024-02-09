@@ -73,6 +73,19 @@ function deleteBook(id) {
     }
 }
 
+function showMessage(message) {
+    dialogMessage.textContent = message;
+    overlay.classList.add('show');
+    dialog.classList.add('show');
+    dialogConfirm.addEventListener('click', closeDialog);
+}
+
+function closeDialog() {
+    overlay.classList.remove('show');
+    dialog.classList.remove('show');
+    dialogConfirm.removeEventListener('click', closeDialog);
+}
+
 function moveBook(book) {
     book.isComplete = !book.isComplete;
     saveBooksToStorage();
@@ -105,17 +118,6 @@ function editBook(id) {
         renderBooks();
         showMessage('Buku berhasil diedit!');
     }
-}
-
-function showMessage(message) {
-    dialogMessage.textContent = message;
-    overlay.style.display = 'block';
-    dialog.style.display = 'block';
-}
-
-function closeDialog() {
-    overlay.style.display = 'none';
-    dialog.style.display = 'none';
 }
 
 addBookForm.addEventListener('submit', addBook);
